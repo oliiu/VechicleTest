@@ -1,0 +1,18 @@
+1、git add . 加入暂存区
+
+2、git push -u origin main  推送到远程
+
+3、git commit -m "Initial commit: 项目初始化" 完成第一次提交（这一步是关键，必须有提交记录才能 push）
+
+4、如果你确实只是想传一个空仓库，强制推送 main 分支：
+	# 创建一个临时的提交（针对空仓库）
+	git commit --allow-empty -m "Initial empty commit"
+	# 然后推送
+	git push -u origin main
+
+5、分支名是 master 的情况
+	如果你的 Git 版本较旧，默认分支是 master，推送时要指定名字：
+	git push -u origin master
+	或者本地重命名分支为 main：
+	git branch -M main
+	git push -u origin main
