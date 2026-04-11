@@ -1,36 +1,42 @@
 @echo off
 chcp 65001 >nul
+cls
 echo ==============================================
 echo       Git 自动拉取+提交+双平台推送脚本
 echo ==============================================
 echo.
 
-:: 让你自定义输入提交日志
-set /p commit_msg="请输入本次提交说明（例如：更新脚本、修复bug）："
+:: 在这里等待你输入提交说明
+set "commit_msg="
+set /p "commit_msg=📝 请输入提交日志："
 
-:: 如果没输入，自动给一个默认值
-if "%commit_msg%"=="" (
-    set commit_msg=自动同步：%date% %time%
+:: 如果你什么都不输入，自动使用默认日志
+if not defined commit_msg (
+    set "commit_msg=自动同步 %date% %time%"
 )
 
 echo.
-echo [1/5] 正在同步 Gitee 远程代码...
+echo ==============================================
+echo 本次提交说明：%commit_msg%
+echo ==============================================
+echo.
+
+:: 开始执行
+echo [1/4] 拉取最新代码...
 git pull gitee master --allow-unrelated-histories
 
-echo [2/5] 正在添加所有文件...
+echo [2/4] 添加所有文件...
 git add -A
 
-echo [3/5] 正在提交代码：%commit_msg%
+echo [3/4] 提交中...
 git commit -m "%commit_msg%"
 
-echo [4/5] 正在推送到 GitHub...
+echo [4/4] 双平台推送中...
 git push origin master
-
-echo [5/5] 正在推送到 Gitee...
 git push gitee master
 
 echo.
 echo ==============================================
-echo              ✅ 全部操作完成！
+echo              ✅ 全部完成！
 echo ==============================================
 pause
