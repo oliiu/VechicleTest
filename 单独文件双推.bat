@@ -1,14 +1,14 @@
 @echo off
 chcp 65001 >nul
 cls
-color 0A
+color 0B
 echo ==============================================
-echo           拖入文件夹 → 自动推送
+echo           拖入单文件 → 自动推送
 echo ==============================================
 echo.
 
 if "%~1"=="" (
-    echo 请把【整个文件夹】拖到此脚本图标上运行！
+    echo 请把【单个文件】拖到此脚本图标上运行！
     echo.
     pause
     exit
@@ -19,16 +19,16 @@ for /f %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo 当前分支：%branch%
 echo.
 
-set "folder=%~1"
-echo 已拖入文件夹：%folder%
+set "file=%~1"
+echo 已拖入文件：%file%
 echo.
 
-git add "%folder%/*"
-git commit -m "文件夹更新：%~nx1"
+git add "%file%"
+git commit -m "单文件更新：%~nx1"
 git pull origin %branch%
 git push origin %branch%
 
 echo.
-echo ✅ 文件夹推送成功！
+echo ✅ 单文件推送成功！
 echo.
 pause
