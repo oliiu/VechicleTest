@@ -29,9 +29,9 @@ if not exist "%target_file%" (
     exit /b
 )
 
-git status --porcelain >nul
-if %errorlevel% equ 0 (
-    echo ✅ 没有任何文件需要提交，脚本自动退出。
+git status --porcelain | findstr . >nul 2>nul
+if %errorlevel% equ 1 (
+    echo ✅ 没有任何文件变更，脚本自动退出。
     pause >nul
     exit
 )
