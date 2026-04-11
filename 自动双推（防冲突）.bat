@@ -11,7 +11,7 @@ git pull gitee master --allow-unrelated-histories
 
 :: 2. 添加所有本地修改
 echo [2/5] 正在添加修改文件...
-git add .
+git add -A
 
 :: 3. 提交代码（自动生成提交信息）
 echo [3/5] 正在提交代码...
