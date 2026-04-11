@@ -21,6 +21,14 @@ echo 本次提交说明：%commit_msg%
 echo ==============================================
 echo.
 
+git status --porcelain | findstr . >nul 2>nul
+if %errorlevel% equ 1 (
+    echo ✅ 没有任何文件变更，脚本自动退出。
+    pause >nul
+    exit
+)
+
+
 :: 开始执行
 echo [1/4] 拉取最新代码...
 git pull gitee master --allow-unrelated-histories
