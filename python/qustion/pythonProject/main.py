@@ -34,13 +34,14 @@ def flag2(num1,num2,num3):
 #大数组的处理函数
 def numHandle(num1,num2):
     # 大数组的生成
-    arr_big = numcrate(1,num1 + 1)
+    arr_big = numcrate(0,num1 + 1)
+    #小数组输入
     union=small_numHandle(num2,num1)
     # 大减小
     result = list(set(arr_big) - set(union))
     # result=[x for x in arr_big if x not in union]
     # 输出
-    print(f"剩余：{len(result)}")
+    print(f"剩余树数量：{len(result)}")
     return
 
 #小数组处理函数
@@ -49,6 +50,7 @@ def small_numHandle(quantity,limit):
     # 小数组的生成|合并
     print("输入各区域大小\n")
     for numr in range(quantity):
+        print(f"第{numr}块区域")
         inputNum1 = input().split()
         arr_numr = list(map(int, inputNum1))
         if flag2(arr_numr[0],arr_numr[1],limit):
